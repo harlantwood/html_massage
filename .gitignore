@@ -1,0 +1,5 @@
+.bundle
+.idea
+Gemfile.lock
+pkg/*
+README-backup*
