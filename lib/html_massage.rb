@@ -2,7 +2,7 @@ require "cgi"
 require "nokogiri"
 require "sanitize"
 require "html_massage/version"
-require "html_massage/old_api/old_api"
+#require "html_massage/old_api/old_api"
 
 module HtmlMassager
 
