@@ -26,10 +26,10 @@ Give your HTML a massage, in just the ways it loves:
     }
 
     puts HtmlMassage.html( html )
-    #
+    # => "<div>This is some great content!</div>"
 
     puts HtmlMassage.text( html )
-    #
+    # => "This is some great content!\n"
 
 ### Content Only
 
