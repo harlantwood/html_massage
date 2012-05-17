@@ -132,7 +132,7 @@ module HtmlMassager
       new( html, options ).to_html
     end
 
-    def self.text( html, options = {} )
+    def self.text( html, options={} )
       new( html, options ).to_text
     end
 
@@ -172,13 +172,12 @@ module HtmlMassager
     end
 
     def sanitize!( sanitize_options )
-      @html = Sanitize.clean( @html, sanitize_options )
-
       # Sanitize does not thoroughly remove these tags -- so we do a manual pass:
       %w[ script noscript style ].each do |tag|
         @html.gsub!( %r{<#{tag}[^>]*>.*?</#{tag}>}mi, '' ) unless sanitize_options[ :elements ].include?( tag )
       end
 
+      @html = Sanitize.clean( @html, sanitize_options )
       @html
     end
 
