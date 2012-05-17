@@ -204,6 +204,8 @@ module HtmlMassager
         if value
           tag[ attr ] =
             case value
+              when %r{^//}  # eg src="//upload.wikimedia.org/wikipedia/Map.png"
+                value
               when %r{^/}
                 File.join( base_url, value )
               when %r{^\.\.}

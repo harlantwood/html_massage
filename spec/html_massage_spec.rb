@@ -174,6 +174,13 @@ describe HtmlMassager::HtmlMassage do
       html_massager.absolutify_links!.should == original_html
     end
 
+    it 'should leave // style URLs alone' do
+      source_url = 'http://en.wikipedia.org/wiki/Singularity'
+      original_html = '<a href="//wired.com/wiredscience">wired science</a>'
+      html_massager = HtmlMassage.new( original_html, :source_url => source_url )
+      html_massager.absolutify_links!.should == original_html
+    end
+
     it 'should leave "jump links" alone' do
       source_url = 'http://en.wikipedia.org/wiki/Singularity'
       original_html = '<a href="#cite_1">1</a>'
