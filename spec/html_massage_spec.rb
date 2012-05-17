@@ -132,16 +132,6 @@ describe HtmlMassager::HtmlMassage do
   #
   #end
 
-  describe '.absolutify_images' do
-    it 'should work for absolute path links' do
-      source_url = 'http://enlightenedstructure.org/Home/'
-      original_html = '<img src="/IMG/we-are.png" alt="" class="icon">'
-      html_massager = HtmlMassage.new( original_html, :source_url => source_url )
-      html_massager.absolutify_images!.should ==
-          '<img src="http://enlightenedstructure.org/IMG/we-are.png" alt="" class="icon">'
-    end
-  end
-
   describe '.absolutify_links' do
     it 'should work for absolute path links' do
       source_url = 'http://en.wikipedia.org/wiki/Singularity'
@@ -186,6 +176,32 @@ describe HtmlMassager::HtmlMassage do
       original_html = '<a href="#cite_1">1</a>'
       html_massager = HtmlMassage.new( original_html, :source_url => source_url )
       html_massager.absolutify_links!.should == original_html
+    end
+  end
+
+  describe '.absolutify_images' do
+    it 'should work for absolute path links' do
+      source_url = 'http://enlightenedstructure.org/Home/'
+      original_html = '<img src="/IMG/we-are.png" alt="" class="icon">'
+      html_massager = HtmlMassage.new( original_html, :source_url => source_url )
+      html_massager.absolutify_images!.should ==
+          '<img src="http://enlightenedstructure.org/IMG/we-are.png" alt="" class="icon">'
+    end
+
+    it 'should work for absolute path links (bugfix)' do
+      source_url = 'http://www.realitysandwich.com/blog/daniel_pinchbeck'
+      original_html = '<img src="/sites/realitysandwich.com/themes/zen/pinkreality/images/creative-commons-license.png" alt="Attribution-Noncommercial-Share Alike 3.0 Unported" title="" width="88" height="31">'
+      html_massager = HtmlMassage.new( original_html, :source_url => source_url )
+      html_massager.absolutify_images!.should ==
+          '<img src="http://www.realitysandwich.com/sites/realitysandwich.com/themes/zen/pinkreality/images/creative-commons-license.png" alt="Attribution-Noncommercial-Share Alike 3.0 Unported" title="" width="88" height="31">'
+    end
+
+    it 'should leave // style URLs alone' do
+      # Note: this is legal for image URLs, is it legal for link hrefs?
+      source_url = 'http://en.wikipedia.org/wiki/List_of_communes_in_France_with_over_20,000_inhabitants_(2006_census)'
+      original_html = '<img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/f/f9/France-CIA_WFB_Map.png/220px-France-CIA_WFB_Map.png" width="220" height="235" class="thumbimage">'
+      html_massager = HtmlMassage.new( original_html, :source_url => source_url )
+      html_massager.absolutify_images!.should == original_html
     end
   end
 

@@ -75,3 +75,6 @@ Give your HTML a massage, in just the ways it loves:
     #   </body>
     # </html>
 
+    puts html_massage.absolutify_images!
+    #
+
