@@ -142,7 +142,8 @@ module HtmlMassager
       @html = html.dup
       @source_url = options.delete( :source_url )
 
-      absolutify_links! if options.delete( :links ) == :absolute
+      absolutify_links!  if options.delete( :links  ) == :absolute
+      absolutify_images! if options.delete( :images ) == :absolute
       include!( options.delete( :include ) )
       exclude!( options.delete( :exclude ) )
       sanitize!( options.delete( :sanitize ) )
@@ -182,30 +183,38 @@ module HtmlMassager
     end
 
     def absolutify_links!
-      raise "When passing in options[:links] => :absolute, please also pass in options[:source_url]" unless @source_url
+      absolutify_paths!('a', 'href')
+    end
+
+    def absolutify_images!
+      absolutify_paths!('img', 'src')
+    end
+
+    def absolutify_paths!(tag_name, attr)
+      raise "When passing in options[:images] => :absolute, please also pass in options[:source_url]" unless @source_url
       match = @source_url.match( %r{(^[a-z]+?://[^/]+)(/.+/)?}i )
       return @html unless match
       base_url = match[ 1 ]
       resource_dir_url = match[ 0 ]   # whole regexp match
-
       dom = Nokogiri::HTML.fragment( @html )
-      links = dom / 'a'
-      links.each do |link|
-        href = link[ 'href' ]
-        if href
-          link[ 'href' ] =
-            case href
+
+      tags = dom / tag_name
+      tags.each do |tag|
+        value = tag[ attr ]
+        if value
+          tag[ attr ] =
+            case value
               when %r{^/}
-                File.join( base_url, href )
+                File.join( base_url, value )
               when %r{^\.\.}
-                File.join( resource_dir_url, href )
+                File.join( resource_dir_url, value )
               else
-                href
+                value
             end
         end
       end
+
       @html = dom.to_s.strip
-      @html
     end
 
     def to_text

@@ -132,6 +132,16 @@ describe HtmlMassager::HtmlMassage do
   #
   #end
 
+  describe '.absolutify_images' do
+    it 'should work for absolute path links' do
+      source_url = 'http://enlightenedstructure.org/Home/'
+      original_html = '<img src="/IMG/we-are.png" alt="" class="icon">'
+      html_massager = HtmlMassage.new( original_html, :source_url => source_url )
+      html_massager.absolutify_images!.should ==
+          '<img src="http://enlightenedstructure.org/IMG/we-are.png" alt="" class="icon">'
+    end
+  end
+
   describe '.absolutify_links' do
     it 'should work for absolute path links' do
       source_url = 'http://en.wikipedia.org/wiki/Singularity'
@@ -141,20 +151,20 @@ describe HtmlMassager::HtmlMassage do
           '<a href="http://en.wikipedia.org/wiki/Ray_Kurzweil">Ray</a>'
     end
 
+    it 'should work for absolute path links (bugfix)' do
+      source_url = 'http://p2pfoundation.net/NextNet'
+      original_html = '<a href="/Ten_Principles_for_an_Autonomous_Internet" title="Ten Principles for an Autonomous Internet">Ten Principles for an Autonomous Internet</a>'
+      html_massager = HtmlMassage.new( original_html, :source_url => source_url )
+      html_massager.absolutify_links!.should ==
+          '<a href="http://p2pfoundation.net/Ten_Principles_for_an_Autonomous_Internet" title="Ten Principles for an Autonomous Internet">Ten Principles for an Autonomous Internet</a>'
+    end
+
     it 'should work for relative links' do
       source_url = 'http://en.wikipedia.org/wiki/Singularity'
       original_html = '<a href="../wiki/Ray_Kurzweil">Ray</a>'
       html_massager = HtmlMassage.new( original_html, :source_url => source_url )
       html_massager.absolutify_links!.should ==
           '<a href="http://en.wikipedia.org/wiki/../wiki/Ray_Kurzweil">Ray</a>'
-    end
-
-    it 'should work for relative links' do
-      source_url = 'http://p2pfoundation.net/NextNet'
-      original_html = '<a href="/Ten_Principles_for_an_Autonomous_Internet" title="Ten Principles for an Autonomous Internet">Ten Principles for an Autonomous Internet</a>'
-      html_massager = HtmlMassage.new( original_html, :source_url => source_url )
-      html_massager.absolutify_links!.should ==
-          '<a href="http://p2pfoundation.net/Ten_Principles_for_an_Autonomous_Internet" title="Ten Principles for an Autonomous Internet">Ten Principles for an Autonomous Internet</a>'
     end
 
     it 'should leave full URLs alone' do
