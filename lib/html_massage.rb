@@ -204,7 +204,7 @@ module HtmlMassager
             end
         end
       end
-      @html = dom.to_s.strip!
+      @html = dom.to_s.strip
       @html
     end
 
