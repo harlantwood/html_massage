@@ -183,7 +183,7 @@ module HtmlMassager
 
     def absolutify_links!
       raise "When passing in options[:links] => :absolute, please also pass in options[:source_url]" unless @source_url
-      match = @source_url.match( %r{(^[a-z]+://[^/]+)(/.+/)}i )
+      match = @source_url.match( %r{(^[a-z]+?://[^/]+)(/.+/)?}i )
       return @html unless match
       base_url = match[ 1 ]
       resource_dir_url = match[ 0 ]   # whole regexp match
@@ -204,7 +204,7 @@ module HtmlMassager
             end
         end
       end
-      @html = dom.to_s
+      @html = dom.to_s.strip!
       @html
     end
 
