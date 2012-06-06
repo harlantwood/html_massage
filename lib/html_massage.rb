@@ -20,6 +20,7 @@ module HtmlMassager
       'head',
       'title',
       'meta',
+
       'div#header',
       'div.header',
       '#footer',
@@ -31,6 +32,8 @@ module HtmlMassager
       '.backfornav',
 
       # wordpress:
+      'a#left_arrow',
+      'a#right_arrow',
       'div#comments',
       'div#comment-section',
       'div#respond',
@@ -100,6 +103,16 @@ module HtmlMassager
                            'title', 'type', 'usemap', 'valign', 'value',
                            'vspace', 'width']
               },
+
+              # medium permissive list:
+              #:elements => [
+              #    'a', 'b', 'blockquote', 'br', 'code', 'dd', 'del', 'dl', 'dt',
+              #    'em', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'hr', 'i',
+              #    'img', 'ins', 'li', 'ol', 'p', 'pre', 'small', 'strike', 'strong', 'sub',
+              #    'sup', 'table', 'tbody', 'td', 'th',
+              #    'thead', 'tr', 'u', 'ul',
+              #],
+
               :protocols => {
                   'a' => {'href' => ['http', 'https', 'mailto', :relative]},
                   'img' => {'src' => ['http', 'https', :relative]}
