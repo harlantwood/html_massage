@@ -17,6 +17,9 @@ module HtmlMassager
 
     DEFAULT_EXCLUDE_OPTIONS = [
       # general:
+      'head',
+      'title',
+      'meta',
       'div#header',
       'div.header',
       '#footer',
