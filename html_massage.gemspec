@@ -13,8 +13,8 @@ Gem::Specification.new do |s|
 
   s.rubyforge_project = "html_massage"
 
-  s.add_dependency('nokogiri', "~> 1.4.4")
-  s.add_dependency('sanitize', "~> 2.0.0")
+  s.add_dependency('nokogiri', ">= 1.4.4")
+  s.add_dependency('sanitize', ">= 2.0.0")
 
   s.add_development_dependency('rspec', "~> 2.5.0")
 
