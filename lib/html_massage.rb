@@ -130,15 +130,6 @@ module HtmlMassager
               # https://github.com/github/gollum/blob/master/lib/gollum/sanitization.rb
           }
 
-
-
-#    def massage!
-#      content_only!
-#      sanitize_html!
-#      absolutify_links! if @source_url
-#      @html
-#    end
-
     DEFAULTS = {
             :include => INCLUDE_CONTENT_ONLY,
             :exclude => DEFAULT_EXCLUDE_OPTIONS,
