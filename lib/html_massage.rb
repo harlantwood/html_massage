@@ -120,7 +120,7 @@ module HtmlMassager
                   'img' => {'src' => ['http', 'https', :relative]}
               },
 
-              # Consider including for deprecated/historical/or spam-suspect pages:
+              # Consider including for deprecated/historical or spam-suspect pages:
               #
               #        :add_attributes => {
               #            'a' => {'rel' => 'nofollow'}
@@ -249,7 +249,7 @@ module HtmlMassager
       # nbsp => ' '
       text.gsub!(/&nbsp;/, ' ')
 
-      # TODO: figure out how to do these in ruby 1.9.2:
+      # TODO: figure out how to do these in ruby 1.9:
       # They now throw 'incompatible encoding -- ascii regexp for utf8 string'
       #    text.gsub!( /\302\240/, ' ' )  # UTF8 for nbsp
       #    text.gsub!( /\240/, ' ' )      # ascii for nbsp
@@ -280,21 +280,20 @@ module HtmlMassager
       "#{text}\n"
     end
 
-    def strip_lines( text )
-      lines = text.split( "\n" )
+    def strip_lines(content)
+      lines = content.split( $/ )    # $/ is the current ruby line ending, \n by default
       lines.map!{ |line| line.strip }
-      text = lines.join( "\n" )
-      text.strip
+      processed = lines.join( $/ )
+      processed.strip
     end
 
 
-    # Old API: last used in gem version 0.0.2
     def to_html
       @html.strip!
+      @html
     end
 
   end
-
 
 end
 

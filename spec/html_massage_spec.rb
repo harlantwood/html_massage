@@ -132,7 +132,7 @@ describe HtmlMassager::HtmlMassage do
   #
   #end
 
-  describe '.absolutify_links' do
+  describe '#absolutify_links' do
     it 'should work for absolute path links' do
       source_url = 'http://en.wikipedia.org/wiki/Singularity'
       original_html = '<a href="/wiki/Ray_Kurzweil">Ray</a>'
@@ -179,7 +179,7 @@ describe HtmlMassager::HtmlMassage do
     end
   end
 
-  describe '.absolutify_images' do
+  describe '#absolutify_images' do
     it 'should work for absolute path links' do
       source_url = 'http://enlightenedstructure.org/Home/'
       original_html = '<img src="/IMG/we-are.png" alt="" class="icon">'
