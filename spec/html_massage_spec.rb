@@ -205,19 +205,26 @@ describe HtmlMassager::HtmlMassage do
     end
   end
 
-  #describe "Old API v0.0.2 -- code sample from README" do
-  #  before do
-  #    html = "<html><body><div id='header'>My Site</div><div>This is some great content!</div></body></html>"
-  #    @html_massage = HtmlMassage.new( html, :ignored_selectors => [ '#header' ] )
-  #  end
-  #
-  #  it '#to_html' do
-  #    @html_massage.to_html.should == "<div>This is some great content!</div>"
-  #  end
-  #
-  #  it '#to_html' do
-  #    @html_massage.to_text.should == "This is some great content!\n"
-  #  end
-  #end
+  describe '#tidy_tables!' do
+    it 'should remove multiple newlines from tables' do
+      HtmlMassage.new("<table><tr>\n<th>Chư\n\n\nYang Sin National Park</th>\n\n\n</tr></table>").tidy_tables!.should ==
+        "<table><tr>\n<th>Chư\nYang Sin National Park</th>\n</tr></table>"
+    end
+  end
+
+  describe "#to_html" do
+    before do
+      html = "<html><body><div id='header'>My Site</div><div>This is some great content!</div></body></html>"
+      @html_massage = HtmlMassage.new( html, :ignored_selectors => [ '#header' ] )
+    end
+
+    it '#to_html' do
+      @html_massage.to_html.should == "<div>This is some great content!</div>"
+    end
+
+    it '#to_html' do
+      @html_massage.to_text.should == "This is some great content!\n"
+    end
+  end
 
 end

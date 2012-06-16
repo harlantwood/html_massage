@@ -156,8 +156,10 @@ module HtmlMassager
       include!( options.delete( :include ) )
       exclude!( options.delete( :exclude ) )
       sanitize!( options.delete( :sanitize ) )
+      tidy_whitespace!
 
       raise "Unexpected options #{options.inspect}" unless options.empty?
+      @html
     end
 
     def translate_old_options( options )
@@ -226,6 +228,15 @@ module HtmlMassager
       end
 
       @html = dom.to_s.strip
+    end
+
+    def tidy_whitespace!
+      @html = strip_lines(@html)
+      tidy_tables!
+    end
+
+    def tidy_tables!
+      @html.gsub!(%r{(<table\b)(.+?)(</table>)}m) { open,body,close=$1,$2,$3; open + body.gsub(/\n{2,}/, "\n") + close }
     end
 
     def to_text
