@@ -11,8 +11,6 @@ module HtmlMassager
     INCLUDE_CONTENT_ONLY = %w[
       html
       body
-      #content
-      .content
     ]
 
     DEFAULT_EXCLUDE_OPTIONS = [
@@ -29,6 +27,8 @@ module HtmlMassager
       'div#sidebar',
       'div.sidebar',
       '#breadcrumbs',
+      '.breadcrumbs',
+      '#backfornav',
       '.backfornav',
 
       # wordpress:
@@ -54,18 +54,6 @@ module HtmlMassager
 
       # signup:
       '#mailchimp_signup_bottom',
-
-      # wikinodes:
-      '.jedi_bar_wikinodes',
-      '.remix_on_wikinodes_tab',
-
-      # Posterous blog
-      'div.editbox',
-      'div.postmeta',
-      'div.tag-listing',
-      'div.posterous_tweet_button',
-      'div.comment-count',
-      'div.col#secondary',
     ]
 
     DEFAULT_SANITIZE_OPTIONS = {
