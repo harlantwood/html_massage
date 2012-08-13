@@ -21,6 +21,7 @@ module HtmlMassager
 
       'div#header',
       'div.header',
+      '.footer',
       '#footer',
       'div#navigation',
       'div.navigation',
@@ -30,6 +31,8 @@ module HtmlMassager
       '.breadcrumbs',
       '#backfornav',
       '.backfornav',
+      'div.post-footer',
+      'div.navigation',
 
       # wordpress:
       'a#left_arrow',
@@ -37,6 +40,10 @@ module HtmlMassager
       'div#comments',
       'div#comment-section',
       'div#respond',
+
+      # blog widgets
+      '.widget_blog_subscription',
+      '.loggedout-follow-normal',
 
       # wikipedia "message boxes" -- metadata such as "requires cleanup":
       # see http://en.wikipedia.org/wiki/Template:Ambox
@@ -48,9 +55,17 @@ module HtmlMassager
       'table.fmbox',
       'table.dmbox',
 
+      # mediawiki
+      '#mw-subcategories',
+      '#mw-pages',
+      '#mw-head',
+      '#mw-panel',
+
       # social media sharing:
       'ul#sharebar',
       'ul#sharebarx',
+      '.sharedaddy',
+      '#sharing_email',
 
       # signup:
       '#mailchimp_signup_bottom',
