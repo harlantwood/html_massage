@@ -5,7 +5,7 @@ require 'html_massage/version'
 
 Gem::Specification.new do |gem|
   gem.name          = "html_massage"
-  gem.version       = HtmlMassage::VERSION
+  gem.version       = HtmlMassager::VERSION
   gem.authors       = ["Harlan T Wood"]
   gem.email         = ["code@harlantwood.net"]
   gem.homepage      = "https://github.com/harlantwood/html_massage"
