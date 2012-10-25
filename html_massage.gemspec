@@ -1,25 +1,26 @@
 # -*- encoding: utf-8 -*-
-$:.push File.expand_path("../lib", __FILE__)
-require "html_massage/version"
+lib = File.expand_path('../lib', __FILE__)
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+require 'html_massage/version'
 
-Gem::Specification.new do |s|
-  s.name        = "html_massage"
-  s.version     = HtmlMassager::VERSION
-  s.authors     = ["Harlan T Wood"]
-  s.email       = ["harlan@thegoldensun.com"]
-  s.homepage    = "https://github.com/harlantwood/html_massage"
-  s.summary     = %{Massages HTML how you want to.}
-  s.description = %{Massages HTML how you want to: sanitize tags, remove headers and footers, convert to plain text.}
+Gem::Specification.new do |gem|
+  gem.name          = "html_massage"
+  gem.version       = HtmlMassage::VERSION
+  gem.authors       = ["Harlan T Wood"]
+  gem.email         = ["code@harlantwood.net"]
+  gem.homepage      = "https://github.com/harlantwood/html_massage"
+  gem.summary       = %{Massages HTML how you want to.}
+  gem.description   = %{Massages HTML how you want to: sanitize tags, remove headers and footers, convert to plain text.}
 
-  s.rubyforge_project = "html_massage"
+  gem.files         = `git ls-files`.split($/)
+  gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
+  gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
+  gem.require_paths = ["lib"]
 
-  s.add_dependency('nokogiri', ">= 1.4.4")
-  s.add_dependency('sanitize', ">= 2.0.0")
+  gem.add_dependency('nokogiri', ">= 1.4")
+  gem.add_dependency('sanitize', ">= 2.0")
 
-  s.add_development_dependency('rspec', "~> 2.5.0")
+  gem.add_development_dependency('rspec', ">= 2.5")
 
-  s.files         = `git ls-files`.split("\n")
-  s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
-  s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
-  s.require_paths = ["lib"]
 end
+
