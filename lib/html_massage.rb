@@ -21,10 +21,14 @@ module HtmlMassager
 
       'div#header',
       'div.header',
+      'div#banner',
+      'div.banner',
       '.footer',
       '#footer',
       'div#navigation',
       'div.navigation',
+      'div#nav',
+      'div.nav',
       'div#sidebar',
       'div.sidebar',
       '#breadcrumbs',
@@ -40,6 +44,10 @@ module HtmlMassager
       'div#comments',
       'div#comment-section',
       'div#respond',
+
+      # typepad
+      '#pagebody > #pagebody-inner > #alpha',
+      'p.content-nav',
 
       # blog widgets
       '.widget_blog_subscription',
