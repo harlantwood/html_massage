@@ -53,6 +53,24 @@ module HtmlMassager
       '.widget_blog_subscription',
       '.loggedout-follow-normal',
 
+
+      # wikipedia
+
+      '#bodyContent > #siteSub',
+      '#bodyContent > #contentSub',
+      '#bodyContent > #jump-to-nav',
+      'table.metadata',
+      'table.navbox',
+      'table.toc',
+      'div#catlinks',
+      'div.printfooter',
+      'h1 > span.editsection',
+      'h2 > span.editsection',
+      'h3 > span.editsection',
+      'h4 > span.editsection',
+      'h5 > span.editsection',
+      'h6 > span.editsection',
+
       # wikipedia "message boxes" -- metadata such as "requires cleanup":
       # see http://en.wikipedia.org/wiki/Template:Ambox
       'table.ambox',
