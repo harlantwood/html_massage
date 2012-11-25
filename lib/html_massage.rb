@@ -205,7 +205,7 @@ module HtmlMassager
       selectors_to_exclude.to_a.each do |selector_to_exclude|
         ( doc / selector_to_exclude ).remove
       end
-      @html = doc.to_s
+      @html = doc.inner_html
     end
 
     def include!( selectors_to_include )
