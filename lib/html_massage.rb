@@ -185,8 +185,9 @@ module HtmlMassager
     def massage!( options={} )
       self.class.translate_old_options( options )
       options = DEFAULTS.merge( options )
-      absolutify_links!(options[:source_url])  if options.delete( :links  ) == :absolute
-      absolutify_images!(options[:source_url]) if options.delete( :images ) == :absolute
+      source_url = options.delete( :source_url )
+      absolutify_links!(source_url)  if options.delete( :links  ) == :absolute
+      absolutify_images!(source_url) if options.delete( :images ) == :absolute
       include!( options.delete( :include ) )
       exclude!( options.delete( :exclude ) )
       sanitize!( options.delete( :sanitize ) )
