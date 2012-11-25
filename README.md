@@ -19,62 +19,63 @@ Give your HTML a massage, in just the ways it loves:
         </head>
         <body>
           <div id="header">My Site</div>
-          <div>This is some great content!</div>
-          <a href ="foo/bar.html">Click this link</a>
+          <div>This is some <i>great</i> content!</div>
         </body>
       </html>
     }
 
-    puts HtmlMassage.html( html )
-    # => "<div>This is some great content!</div>"
+    HtmlMassage.html( html )
+    # => "<div>This is some <i>great</i> content!</div>"
 
-    puts HtmlMassage.text( html )
-    # => "This is some great content!\n"
+    HtmlMassage.markdown( html )
+    # => "This is some _great_ content!"
 
-### Content Only
+    HtmlMassage.text( html )
+    # => "This is some great content!"
 
-    html_massage = HtmlMassage.new( html,
-            :exclude => [ '#header' ] )
-    # => #<HtmlMassager::HtmlMassage ... >
+### Custom includes and excludes
 
-    puts html_massage.exclude!
-    # <div>This is some great content!</div>
-    # <a href="foo/bar.html">Click this link</a>
+    html = %{
+      <html>
+        <body>
+          <div class="custom_navigation">some links to other pages...</div>
+          <div>This is some <i>great</i> content!</div>
+        </body>
+      </html>
+    }
+
+    html_massage = HtmlMassage.new( html )
+    html_massage.exclude!( [ '.custom_navigation' ] )
+    html_massage.include!( [ 'body' ] )
+    html_massage.to_html
+    # => <div>This is some <i>great</i> content!</div>
 
 ### Sanitize HTML
 
-    html_massage = HtmlMassage.new( html,
-            :exclude => [ '#header' ] )
-    # => #<HtmlMassager::HtmlMassage ... >
+    html = %{
+      <html>
+        <head>
+          <script type="text/javascript">document.write('I am a bad script');</script>
+        </head>
+        <body>
+          <div>This is some <i>great</i> content!</div>
+        </body>
+      </html>
+    }
 
-    puts html_massage.sanitize_html!
-    # <html>
-    #   <head>
-    #   </head>
-    #   <body>
-    #     <div id="header">My Site</div>
-    #     <div>This is some great content!</div>
-    #   </body>
-    # </html>
+    html_massage = HtmlMassage.new( html )
+    html_massage.sanitize!(  :elements => ['div'] )
+    html_massage.to_html
+    # => <div>This is some <i>great</i> content!</div>
 
 ### Make Links Absolute
 
-    html_massage = HtmlMassage.new( html,
-            :exclude => [ '#header' ],
-            :source_url => 'http://example.com/joe/page1.html' )
+    html = %{
+      <a href ="/foo/bar.html">Click this link</a>
+    }
 
-    puts html_massage.absolutify_links!
-    # <html>
-    #   <head>
-    #     <script type="text/javascript">document.write('I am a bad script');</script>
-    #   </head>
-    #   <body>
-    #     <div id="header">My Site</div>
-    #     <div>This is some great content!</div>
-    #     <a href ="http://example.com/joe/foo/bar.html">Click this link</a>
-    #   </body>
-    # </html>
-
-    puts html_massage.absolutify_images!
-    #
+    html_massage = HtmlMassage.new( html )
+    html_massage.absolutify_links!( 'http://example.com/joe/page1.html' )
+    html_massage.to_html
+    #     <a href ="http://example.com/foo/bar.html">Click this link</a>
 
