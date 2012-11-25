@@ -226,7 +226,6 @@ module HtmlMassager
       end
 
       @html = Sanitize.clean( @html, sanitize_options )
-      @html
     end
 
     def absolutify_links!(source_url)
