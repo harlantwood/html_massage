@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+
+require 'html_massage/cli'
+HtmlMassager::CLI.start

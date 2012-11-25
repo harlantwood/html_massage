@@ -1,6 +1,7 @@
 require "cgi"
 require "nokogiri"
 require "sanitize"
+require "reverse_markdown"
 require "html_massage/version"
 #require "html_massage/old_api/old_api"
 
@@ -172,6 +173,10 @@ module HtmlMassager
 
     def self.text( html, options={} )
       new( html, options ).to_text
+    end
+
+    def self.markdown( html, options={} )
+      ReverseMarkdown.parse(new( html, options ).to_html)
     end
 
     def initialize( html, options={} )
