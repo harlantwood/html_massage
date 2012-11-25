@@ -3,7 +3,6 @@ require "nokogiri"
 require "sanitize"
 require "reverse_markdown"
 require "html_massage/version"
-#require "html_massage/old_api/old_api"
 
 module HtmlMassager
 
@@ -168,35 +167,35 @@ module HtmlMassager
     }
 
     def self.html( html, options={} )
-      new( html, options ).to_html
+      new( html ).massage!( options ).to_html
     end
 
     def self.text( html, options={} )
-      new( html, options ).to_text
+      new( html ).massage!( options ).to_text
     end
 
     def self.markdown( html, options={} )
-      ReverseMarkdown.parse(new( html, options ).to_html)
+      ReverseMarkdown.parse( self.html( html, options ) )
     end
 
-    def initialize( html, options={} )
-      self.translate_old_options( options )
-      options = DEFAULTS.merge( options )
+    def initialize( html )
       @html = html.dup
-      @source_url = options.delete( :source_url )
+    end
 
-      absolutify_links!  if options.delete( :links  ) == :absolute
-      absolutify_images! if options.delete( :images ) == :absolute
+    def massage!( options={} )
+      self.class.translate_old_options( options )
+      options = DEFAULTS.merge( options )
+      absolutify_links!(options[:source_url])  if options.delete( :links  ) == :absolute
+      absolutify_images!(options[:source_url]) if options.delete( :images ) == :absolute
       include!( options.delete( :include ) )
       exclude!( options.delete( :exclude ) )
       sanitize!( options.delete( :sanitize ) )
       tidy_whitespace!
-
       raise "Unexpected options #{options.inspect}" unless options.empty?
-      @html
+      self
     end
 
-    def translate_old_options( options )
+    def self.translate_old_options( options )
       options[ :exclude ] = options.delete( :ignored_selectors ) if options[ :ignored_selectors ]
     end
 
@@ -217,27 +216,29 @@ module HtmlMassager
       @html = section.inner_html
     end
 
-    def sanitize!( sanitize_options )
+    def sanitize!( sanitize_options={} )
       # Sanitize does not thoroughly remove these tags -- so we do a manual pass:
       %w[ script noscript style ].each do |tag|
-        @html.gsub!( %r{<#{tag}[^>]*>.*?</#{tag}>}mi, '' ) unless sanitize_options[ :elements ].include?( tag )
+        unless sanitize_options[ :elements ] && sanitize_options[ :elements ].include?( tag )
+          @html.gsub!( %r{<#{tag}[^>]*>.*?</#{tag}>}mi, '' )
+        end
       end
 
       @html = Sanitize.clean( @html, sanitize_options )
       @html
     end
 
-    def absolutify_links!
-      absolutify_paths!('a', 'href')
+    def absolutify_links!(source_url)
+      absolutify_paths!('a', 'href', source_url)
     end
 
-    def absolutify_images!
-      absolutify_paths!('img', 'src')
+    def absolutify_images!(source_url)
+      absolutify_paths!('img', 'src', source_url)
     end
 
-    def absolutify_paths!(tag_name, attr)
-      raise "When passing in options[:images] => :absolute, please also pass in options[:source_url]" unless @source_url
-      match = @source_url.match( %r{(^[a-z]+?://[^/]+)(/.+/)?}i )
+    def absolutify_paths!(tag_name, attr, source_url)
+      raise "When asking for absolute images or paths, please pass in source_url" unless source_url
+      match = source_url.match( %r{(^[a-z]+?://[^/]+)(/.+/)?}i )
       return @html unless match
       base_url = match[ 1 ]
       resource_dir_url = match[ 0 ]   # whole regexp match
