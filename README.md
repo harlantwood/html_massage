@@ -69,51 +69,51 @@ HtmlMassage.text( html )
 ### Custom includes and excludes
 
 ```ruby
-    html = %{
-      <html>
-        <body>
-          <div class="custom_navigation">some links to other pages...</div>
-          <div>This is some <i>great</i> content!</div>
-        </body>
-      </html>
-    }
+html = %{
+  <html>
+    <body>
+      <div class="custom_navigation">some links to other pages...</div>
+      <div>This is some <i>great</i> content!</div>
+    </body>
+  </html>
+}
 
-    html_massage = HtmlMassage.new( html )
-    html_massage.exclude!( [ '.custom_navigation' ] )
-    html_massage.include!( [ 'body' ] )
-    html_massage.to_html
-    # => <div>This is some <i>great</i> content!</div>
+html_massage = HtmlMassage.new( html )
+html_massage.exclude!( [ '.custom_navigation' ] )
+html_massage.include!( [ 'body' ] )
+html_massage.to_html
+# => <div>This is some <i>great</i> content!</div>
 ```
 
 ### Sanitize HTML
 
 ```ruby
-    html = %{
-      <html>
-        <head>
-          <script type="text/javascript">document.write('I am a bad script');</script>
-        </head>
-        <body>
-          <div>This is some <i>great</i> content!</div>
-        </body>
-      </html>
-    }
+html = %{
+  <html>
+    <head>
+      <script type="text/javascript">document.write('I am a bad script');</script>
+    </head>
+    <body>
+      <div>This is some <i>great</i> content!</div>
+    </body>
+  </html>
+}
 
-    html_massage = HtmlMassage.new( html )
-    html_massage.sanitize!(  :elements => ['div'] )
-    html_massage.to_html
-    # => <div>This is some <i>great</i> content!</div>
+html_massage = HtmlMassage.new( html )
+html_massage.sanitize!(  :elements => ['div'] )
+html_massage.to_html
+# => <div>This is some <i>great</i> content!</div>
 ```
 
 ### Make Links Absolute
 
 ```ruby
-    html = %{
-      <a href ="/foo/bar.html">Click this link</a>
-    }
+html = %{
+  <a href ="/foo/bar.html">Click this link</a>
+}
 
-    html_massage = HtmlMassage.new( html )
-    html_massage.absolutify_links!( 'http://example.com/joe/page1.html' )
-    html_massage.to_html
-    #     <a href ="http://example.com/foo/bar.html">Click this link</a>
+html_massage = HtmlMassage.new( html )
+html_massage.absolutify_links!( 'http://example.com/joe/page1.html' )
+html_massage.to_html
+# => <a href ="http://example.com/foo/bar.html">Click this link</a>
 ```
