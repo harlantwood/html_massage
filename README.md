@@ -35,6 +35,9 @@ These files will look something like:
 
 ### Full Massage
 
+* Use default whitelist of tags and attributes to sanitize HTML
+* Use default selectors (both include and exclude lists) to attempt to capture only the "content" part of the HTML page
+
     require 'html_massage'
 
     html = %{
