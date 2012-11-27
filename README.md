@@ -1,12 +1,12 @@
 # HTML Massage
 
+[![Build Status](https://secure.travis-ci.org/harlantwood/html_massage.png)](https://travis-ci.org/harlantwood/html_massage)
+
 ## Summary
 
  * Remove headers and footers and navigation, and strip to only the "content" part of the HTML
  * Sanitize tags, removing javascript and styling
  * Convert your HTML to markdown, plain text, or sanitized HTML
-
-[![Build Status](https://secure.travis-ci.org/harlantwood/html_massage.png)](https://travis-ci.org/harlantwood/html_massage)
 
 ## Massaging from the command line
 
