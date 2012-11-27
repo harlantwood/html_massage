@@ -6,7 +6,7 @@
 
  * Remove headers and footers and navigation, and strip to only the "content" part of the HTML
  * Sanitize tags, removing javascript and styling
- * Convert your HTML to markdown, plain text, or sanitized HTML
+ * Convert HTML to markdown, plain text, or sanitized HTML
 
 ## Massaging from the command line
 
@@ -18,16 +18,19 @@ These files will look something like:
 
     ==> singularity.html <==
     <h1 id="firstHeading" class="firstHeading"><span dir="auto">Technological singularity</span></h1>
+
     <p>The <b>technological singularity</b> is the theoretical emergence of greater-than-human <a href="/wiki/Superintelligence" title="Superintelligence">superintelligence</a> through technological means.<sup id="cite_ref-1" class="reference"><a href="#cite_note-1"><span>[</span>1<span>]</span></a></sup> Since the capabilities of such intelligence would be difficult for an unaided human mind to comprehend, the occurrence of a technological singularity is seen as an intellectual <a href="/wiki/Event_horizon" title="Event horizon">event horizon</a>, beyond which events cannot be predicted or understood.</p>
     ...
 
     ==> singularity.md <==
     # Technological singularity
+
     The **technological singularity** is the theoretical emergence of greater-than-human [superintelligence](https://en.wikipedia.org/wiki/Superintelligence "Superintelligence") through technological means. [1] Since the capabilities of such intelligence would be difficult for an unaided human mind to comprehend, the occurrence of a technological singularity is seen as an intellectual [event horizon](https://en.wikipedia.org/wiki/Event_horizon "Event horizon") , beyond which events cannot be predicted or understood.
     ...
 
     ==> singularity.txt <==
     Technological singularity
+
     The technological singularity is the theoretical emergence of greater-than-human superintelligence through technological means.[1] Since the capabilities of such intelligence would be difficult for an unaided human mind to comprehend, the occurrence of a technological singularity is seen as an intellectual event horizon, beyond which events cannot be predicted or understood.
     ...
 
@@ -38,31 +41,34 @@ These files will look something like:
 * Use default whitelist of tags and attributes to sanitize HTML
 * Use default selectors (both include and exclude lists) to attempt to capture only the "content" part of the HTML page
 
-    require 'html_massage'
+```ruby
+require 'html_massage'
 
-    html = %{
-      <html>
-        <head>
-          <script type="text/javascript">document.write('I am a bad script');</script>
-        </head>
-        <body>
-          <div id="header">My Site</div>
-          <div>This is some <i>great</i> content!</div>
-        </body>
-      </html>
-    }
+html = %{
+  <html>
+    <head>
+      <script type="text/javascript">document.write('I am a bad script');</script>
+    </head>
+    <body>
+      <div id="header">My Site</div>
+      <div>This is some <i>great</i> content!</div>
+    </body>
+  </html>
+}
 
-    HtmlMassage.html( html )
-    # => "<div>This is some <i>great</i> content!</div>"
+HtmlMassage.html( html )
+# => "<div>This is some <i>great</i> content!</div>"
 
-    HtmlMassage.markdown( html )
-    # => "This is some _great_ content!"
+HtmlMassage.markdown( html )
+# => "This is some _great_ content!"
 
-    HtmlMassage.text( html )
-    # => "This is some great content!"
+HtmlMassage.text( html )
+# => "This is some great content!"
+```
 
 ### Custom includes and excludes
 
+```ruby
     html = %{
       <html>
         <body>
@@ -77,9 +83,11 @@ These files will look something like:
     html_massage.include!( [ 'body' ] )
     html_massage.to_html
     # => <div>This is some <i>great</i> content!</div>
+```
 
 ### Sanitize HTML
 
+```ruby
     html = %{
       <html>
         <head>
@@ -95,9 +103,11 @@ These files will look something like:
     html_massage.sanitize!(  :elements => ['div'] )
     html_massage.to_html
     # => <div>This is some <i>great</i> content!</div>
+```
 
 ### Make Links Absolute
 
+```ruby
     html = %{
       <a href ="/foo/bar.html">Click this link</a>
     }
@@ -106,6 +116,4 @@ These files will look something like:
     html_massage.absolutify_links!( 'http://example.com/joe/page1.html' )
     html_massage.to_html
     #     <a href ="http://example.com/foo/bar.html">Click this link</a>
-
-
-
+```
