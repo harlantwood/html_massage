@@ -1,5 +1,15 @@
 # HTML Massage   [![Build Status](https://secure.travis-ci.org/harlantwood/html_massage.png)](https://travis-ci.org/harlantwood/html_massage)    [![Gem Version](https://badge.fury.io/rb/html_massage.png)](http://badge.fury.io/rb/html_massage)
 
+## Supported Ruby versions
+
+- 1.9.2
+- 1.9.3
+- 2.0.0
+
+Note that ruby 1.8.x is _not_ supported.                                                 
+
+## Summary
+
  * Remove headers and footers and navigation, and strip to only the "content" part of the HTML
  * Sanitize tags, removing javascript and styling
  * Convert HTML to markdown, plain text, or sanitized HTML
