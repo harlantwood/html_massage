@@ -146,6 +146,15 @@ describe HtmlMassager::HtmlMassage do
     end
 
     it 'should work for relative links' do
+      pending
+      source_url = 'http://en.wikipedia.org/wiki/Singularity'
+      original_html = '<a href="Ray_Kurzweil">Ray</a>'
+      html_massager = HtmlMassage.new( original_html )
+      html_massager.absolutify_links!(source_url).should ==
+          '<a href="http://en.wikipedia.org/wiki/Ray_Kurzweil">Ray</a>'
+    end
+
+    it 'should work for relative links to a parent director' do
       source_url = 'http://en.wikipedia.org/wiki/Singularity'
       original_html = '<a href="../wiki/Ray_Kurzweil">Ray</a>'
       html_massager = HtmlMassage.new( original_html )
