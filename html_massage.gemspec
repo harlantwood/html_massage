@@ -11,6 +11,7 @@ Gem::Specification.new do |gem|
   gem.homepage      = "https://github.com/harlantwood/html_massage"
   gem.summary       = %{Massages HTML how you want to.}
   gem.description   = %{Massages HTML how you want to: sanitize tags, remove headers and footers; output to html, markdown, or plain text.}
+  gem.license       = 'MIT'
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
