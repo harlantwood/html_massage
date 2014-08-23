@@ -17,13 +17,12 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ["lib"]
 
-  gem.add_dependency "nokogiri", ">= 1.4"
-  gem.add_dependency "sanitize", ">= 2.0"
+  gem.add_dependency "nokogiri", "~> 1.6"
+  gem.add_dependency "sanitize", "~> 3.0"
   gem.add_dependency "thor"
-  gem.add_dependency "rest-client", ">= 1.6"
-
-  gem.add_development_dependency "rspec", ">= 2.5"
+  gem.add_dependency "rest-client", "~> 1.7"
   gem.add_dependency "reverse_markdown", "~> 0.5"
 
+  gem.add_development_dependency "rspec", "~> 2.5"
 end
 
