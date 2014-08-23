@@ -175,7 +175,7 @@ module HtmlMassager
     end
 
     def self.markdown( html, options={} )
-      ReverseMarkdown.parse( self.html( html, options ) )
+      ReverseMarkdown.convert( self.html( html, options ) )
     end
 
     def initialize( html )
