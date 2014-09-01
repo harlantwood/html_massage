@@ -23,6 +23,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency "thor"
   gem.add_dependency "rest-client", "~> 1.7"
   gem.add_dependency "reverse_markdown", "~> 0.5"
+  gem.add_dependency "charlock_holmes", "~> 0.7"
 
   gem.add_development_dependency "rspec", "~> 2.5"
 end

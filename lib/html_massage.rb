@@ -2,7 +2,8 @@ require "cgi"
 require "nokogiri"
 require "sanitize"
 require "reverse_markdown"
-require "html_massage/version"
+require "charlock_holmes"
+require File.expand_path File.join(File.dirname(__FILE__), "html_massage", "version")
 
 module HtmlMassager
 
@@ -180,6 +181,11 @@ module HtmlMassager
 
     def initialize( html )
       @html = html.dup
+      detection = CharlockHolmes::EncodingDetector.detect( html ) rescue nil
+      if detection
+        utf8_html = CharlockHolmes::Converter.convert html, detection[:encoding], "UTF-8"
+        @html = utf8_html
+      end
     end
 
     def massage!( options={} )
