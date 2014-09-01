@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
 
-require 'html_massage/cli'
+require File.expand_path File.join(File.dirname(__FILE__), '..', 'lib', 'html_massage', 'cli')
+
 HtmlMassager::CLI.start
