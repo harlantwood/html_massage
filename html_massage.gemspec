@@ -18,6 +18,8 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ["lib"]
 
+  gem.required_ruby_version = '>= 1.9.2'
+
   gem.add_dependency "nokogiri", "~> 1.6"
   gem.add_dependency "sanitize", "~> 3.0"
   gem.add_dependency "thor"
