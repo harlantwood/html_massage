@@ -1,5 +1,5 @@
 require 'thor'
-require 'rest_client'
+require 'rest-client'
 require File.expand_path File.join(File.dirname(__FILE__), '..', 'html_massage')
 
 
