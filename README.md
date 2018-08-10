@@ -2,12 +2,14 @@
 
 ## Supported Ruby versions
 
+In short, Ruby 1.9 and above.  Specifically tested ruby versions are:
+
 - 1.9.2
 - 1.9.3
 - 2.0.0
 - 2.1.1
 
-Note that ruby 1.8.x is _not_ supported.                                                 
+Note that ruby 1.8.x is _not_ supported.
 
 ## Summary
 

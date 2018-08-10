@@ -22,7 +22,7 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency "nokogiri", "~> 1.6"
   gem.add_dependency "sanitize", "~> 3.0"
-  gem.add_dependency "thor"
+  gem.add_dependency "thor", "~> 0"
   gem.add_dependency "rest-client", "~> 1.7"
   gem.add_dependency "reverse_markdown", "~> 0.6"
   gem.add_dependency "charlock_holmes", "~> 0.7"

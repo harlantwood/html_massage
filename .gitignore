@@ -1,5 +1,6 @@
 .bundle
 .idea
+/tmp/
 Gemfile.lock
 pkg/*
 README-backup*
