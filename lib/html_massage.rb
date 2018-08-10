@@ -290,7 +290,7 @@ module HtmlMassager
       # nbsp => ' '
       text.gsub!(/&nbsp;/, ' ')
 
-      # TODO: figure out how to do these in ruby 1.9:
+      # TODO: figure out how to do these in ruby 1.9+:
       # They now throw 'incompatible encoding -- ascii regexp for utf8 string'
       #    text.gsub!( /\302\240/, ' ' )  # UTF8 for nbsp
       #    text.gsub!( /\240/, ' ' )      # ascii for nbsp

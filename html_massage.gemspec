@@ -18,10 +18,10 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ["lib"]
 
-  gem.required_ruby_version = '>= 1.9.2'
+  gem.required_ruby_version = '>= 2'
 
   gem.add_dependency "charlock_holmes", "~> 0.7.6"
-  gem.add_dependency "nokogiri", "~> 1.6", "< 1.6.8"
+  gem.add_dependency "nokogiri", "~> 1.8.2"
   gem.add_dependency "rest-client", "~> 2.0.2"
   gem.add_dependency "reverse_markdown", "~> 1.1.0"
   gem.add_dependency "sanitize", "~> 4.6.6"
