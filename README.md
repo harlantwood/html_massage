@@ -2,7 +2,7 @@
 
 ## Supported Ruby versions
 
-Ruby 2.x and above. Ruby 1.x is _not_ supported.
+Ruby 2.1 and above.
 
 ## Summary
 
